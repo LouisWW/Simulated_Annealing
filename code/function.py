@@ -1,3 +1,5 @@
+import numpy as np
+
 # calculate the energy level of one particle
 def calc_energy_1p(coordinates, particlenumber, list_particles):
     E = 0
