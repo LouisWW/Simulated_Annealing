@@ -13,7 +13,7 @@ import time
 start_time = time.time()
 
 
-repetition=100
+repetition=1000
 energ_dist=[]
 
 for i in range(0,repetition):
@@ -21,7 +21,7 @@ for i in range(0,repetition):
     length_mc = 1000
     iterations = 100
     av_stepsize = 0.02
-    number_of_particles = 30
+    number_of_particles = 4
     T_begin=0.1
     T_end= 0.0000001
     current_T_index = 0
@@ -46,7 +46,7 @@ for i in range(0,repetition):
         list_particles = change_config(list_particles, T, av_stepsize)
         list_total_E.append(total_energy(list_particles))
         
-        energ_dist.append(list_total_E[-1])
+    energ_dist.append(list_total_E[-1])
         
 print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -56,7 +56,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 # plot figures 
 
-plot_dist(list_total_E,repetition)  
+plot_dist(energ_dist,repetition)  
 
 # =============================================================================
   

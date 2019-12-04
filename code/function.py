@@ -115,12 +115,12 @@ def plot_energy(list_total_energy,name=None):
         plt.savefig(name,dpi=300)
         
         
-def plot_dist(list_total_E,repetition,name):
+def plot_dist(energ_dist,repetition,name=None):
     plt.figure()
     ax = plt.gca()
     ax.spines["top"].set_visible(False)  
     ax.spines["right"].set_visible(False)
-    entries, bin_edges, patches = plt.hist(energ_dist, bins =repetition/2 , \
+    entries, bin_edges, patches = plt.hist(energ_dist, bins =int(repetition/4) , \
                                            normed=True,color='k')
     plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
