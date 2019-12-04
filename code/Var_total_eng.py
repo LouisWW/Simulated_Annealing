@@ -13,12 +13,12 @@ import time
 start_time = time.time()
 
 
-repetition=1000
+repetition=100
 energ_dist=[]
 
 for i in range(0,repetition):
 
-    length_mc = 1000
+    length_mc = 10000
     iterations = 100
     av_stepsize = 0.02
     number_of_particles = 4
@@ -45,6 +45,9 @@ for i in range(0,repetition):
 
         list_particles = change_config(list_particles, T, av_stepsize)
         list_total_E.append(total_energy(list_particles))
+        
+    plot_circle(list_particles,circle)
+    print("Total energy",total_energy(list_particles))
         
     energ_dist.append(list_total_E[-1])
         
