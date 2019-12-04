@@ -39,6 +39,20 @@ def total_energy(list_particles):
             
 # =============================================================================
 
+# Boltzmann equation
+
+def accept_config(dE, T):
+    p_boltzmann = np.exp(-dE/T)
+    print(p_boltzmann)
+    if np.random.rand() > p_boltzmann:
+        return False
+    else:
+        return True
+
+
+# =============================================================================
+
+
 # Class to create the different objects
 class Particle:
     def __init__(self):
@@ -63,10 +77,17 @@ def plot_circle(list_particles,circle):
     
     x,y = zip(*[((i.x),float(i.y)) for i in list_particles])
 
+    ax1 = plt.axes(frameon=False)
+    
+    plt.axis('off')
+
     plt.axis("equal")
     plt.scatter(x,y,color='k')
     plt.plot(circle.x,circle.y,'k')
+    plt.xlabel("a.u.",fontweight='bold',fontsize=20)
+    plt.ylabel("a.u.",fontweight='bold',fontsize=20)
     plt.xlim(-1,1)
+    plt.xaxis(visible=False)
     plt.ylim(-1,1)
     plt.show()
     
