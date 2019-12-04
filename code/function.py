@@ -97,7 +97,6 @@ def plot_circle(list_particles,circle,name=None):
     
 def plot_energy(list_total_energy,name=None):
     
-
     plt.figure()
     ax = plt.gca()
     #ax.set_facecolor('lightgray')
