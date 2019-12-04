@@ -12,7 +12,7 @@ def calc_energy_1p(coordinates, particle_number, list_particles):
         if i != particle_number:
             distance = np.sqrt((coordinates[0] - list_particles[i].x) ** 2 + \
                            (coordinates[1] - list_particles[i].y) ** 2)
-           
+
             E += 1 / distance
 
     return E
@@ -21,7 +21,7 @@ def calc_energy_1p(coordinates, particle_number, list_particles):
 
 def total_energy(list_particles):
     
-    total_energy=0
+    total_E=0
     
     for i in range(0,len(list_particles)):
         
@@ -31,10 +31,10 @@ def total_energy(list_particles):
                            (list_particles[i].x - list_particles[k].y) ** 2)
           
            
-            total_energy+=distance
+            total_E+=distance
             
     
-    return total_energy
+    return total_E
             
             
 # =============================================================================
@@ -43,7 +43,8 @@ def total_energy(list_particles):
 
 def accept_config(dE, T):
     p_boltzmann = np.exp(-dE/T)
-    print(p_boltzmann)
+    # print("dE", dE)
+    # print("Boltzmann", p_boltzmann)
     if np.random.rand() > p_boltzmann:
         return False
     else:
@@ -82,12 +83,11 @@ def plot_circle(list_particles,circle):
     plt.axis('off')
 
     plt.axis("equal")
-    plt.scatter(x,y,color='k')
+    plt.scatter(x,y,color='k', s=14)
     plt.plot(circle.x,circle.y,'k')
     plt.xlabel("a.u.",fontweight='bold',fontsize=20)
     plt.ylabel("a.u.",fontweight='bold',fontsize=20)
     plt.xlim(-1,1)
-    plt.xaxis(visible=False)
     plt.ylim(-1,1)
     plt.show()
     
