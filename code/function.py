@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 import random
+from scipy.optimize import curve_fit
 from numba import jit, void, int_, double
 
 # =============================================================================
@@ -125,6 +126,7 @@ def plot_dist(energ_dist,repetition,name=None):
     plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
     plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
+    plt.show()
             
     if name !=None :
         plt.savefig(name,dpi=300)
@@ -132,3 +134,44 @@ def plot_dist(energ_dist,repetition,name=None):
     
 
 # =============================================================================
+def distributed_T(name_distribution, T_begin, T_end, length_mc, iterations):
+
+    list_T = []
+    if name_distribution == "linear":
+        list_T = np.linspace(T_begin, T_end, length_mc / iterations)
+        return list_T
+
+    if name_distribution == "exponential":
+
+        def func(x, T_begin, alpha):
+            return T_begin*alpha**x
+
+        x = [0, length_mc / iterations]
+        yn = [T_begin, T_end]
+        popt, pcov = curve_fit(func, x, yn)
+
+        for i in range(length_mc/iterations):
+            list_T.append(popt[0]*popt[1]**i)
+
+        return list_T
+        # plt.figure()
+        # plt.plot(list_T)
+        # plt.show()
+
+    if name_distribution == "logarithmic":
+
+        def func(t, a, b):
+            return a + b * np.log(t)
+
+        x = [0, length_mc / iterations]
+        yn = [T_begin, T_end]
+        #popt, pcov = curve_fit(func, x, yn, maxfev=10000)
+
+        for i in range(length_mc/iterations):
+            list_T.append(0.07/ np.log(i+1))
+
+        return list_T
+        # plt.figure()
+        # plt.plot(list_T)
+        # plt.show()
+

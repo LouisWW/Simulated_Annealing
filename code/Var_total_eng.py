@@ -13,20 +13,22 @@ import time
 start_time = time.time()
 
 
-repetition=30
+repetition=1000
 energ_dist=[]
 
 for i in range(0,repetition):
 
     length_mc = 10000
-    iterations = 100
+    iterations = 10
     av_stepsize = 0.02
     number_of_particles = 4
-    T_begin=0.1
+    T_begin= 0.1
     T_end= 0.0000001
     current_T_index = 0
 
-    list_T = np.linspace(T_begin, T_end, length_mc/iterations)
+    # create list with different temp used # you can use, linear, exponential, logarithmic
+    # logarithmic is very hard coded still because I couldnt get it to fit
+    list_T = distributed_T("linear", T_begin, T_end, length_mc, iterations)
 
     # create particles
     list_particles=[Particle() for i in range(number_of_particles)]

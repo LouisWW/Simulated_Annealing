@@ -10,13 +10,15 @@ start_time = time.time()
 length_mc = 1000
 iterations = 100
 av_stepsize = 0.02
-number_of_particles = 30
+number_of_particles = 100
 T_begin=0.1
 T_end= 0.0000001
 current_T_index = 0
 
-# create list with different temp used
-list_T = np.linspace(T_begin, T_end, length_mc/iterations)
+# create list with different temp used # you can use, linear, exponential, logarithmic
+# logarithmic is very hard coded still because I couldnt get it to fit
+list_T = distributed_T("linear", T_begin, T_end, length_mc, iterations)
+
 
 # create particles
 list_particles=[Particle() for i in range(number_of_particles)]

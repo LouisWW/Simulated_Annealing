@@ -5,6 +5,7 @@ import numpy as np
 from function import *
 import global_variables
 
+
 ### TO_DO: USE FORCE OF ALL PARTICLES TO INFLUENCE CONFIGUREATION
 
 def change_config(list_particles, T, av_stepsize):
