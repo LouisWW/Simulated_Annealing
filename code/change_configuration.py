@@ -2,13 +2,13 @@
 ###one
 
 import numpy as np
+from function import *
 import global_variables
 
 ### TO_DO: USE FORCE OF ALL PARTICLES TO INFLUENCE CONFIGUREATION
 
 def change_config(list_particles, T):
     N = len(list_particles)
-
 
     # av_stepsize = circle.r/100
     av_stepsize = 0.02
@@ -38,12 +38,13 @@ def change_config(list_particles, T):
                 list_particles.x = temp_x
                 list_particles.y = temp_y
 
-# calculate the energy level of one particle
-def calc_energy_1p(coordinates, particlenumber, list_particles):
-    E = 0
-    for i in range(len(list_particles)):
-        distance = np.sqrt((coordinates[0]-list_particles[i].x)**2+(coordinates[1]-list_particles[i].y)**2)
-        if distance != 0:
-            E += 1/distance
+# mock function to test the change config function
+def accept_config(dE, T):
+    if np.random.rand() > 0.5:
+        return True
+    else:
+        return False
 
-    return E
+list_particles = []
+for i in range(3):
+    list_particles.appedn

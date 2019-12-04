@@ -4,7 +4,6 @@ import random
 
 # =============================================================================
 
-
 # calculate the energy level of one particle
 def calc_energy_1p(coordinates, particlenumber, list_particles):
     E = 0
@@ -18,21 +17,18 @@ def calc_energy_1p(coordinates, particlenumber, list_particles):
 
 # =============================================================================
 
-# Class to create the different objects 
-
-class particle:
-    
+# Class to create the different objects
+class Particle:
     def __init__(self):
         self.x=random.uniform(-1,1)
         # To make sure that the points are within the circle
         self.y=random.uniform(-np.sqrt(1-self.x**2),np.sqrt(1-self.x**2))
      
      
-class circle:
-    
-    def __init__(self):
+class Circle:
+    def __init__(self, r):
         self.theta=np.linspace(0,2*np.pi,100)
-        self.radius=1
+        self.radius=r
         self.x=self.radius*np.cos(self.theta)
         self.y=self.radius*np.sin(self.theta)
    
