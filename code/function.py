@@ -74,22 +74,43 @@ class Circle:
 
 #  Plot the circle with the points in it 
     
-def plot_circle(list_particles,circle):
+def plot_circle(list_particles,circle,name=None):
     
     x,y = zip(*[((i.x),float(i.y)) for i in list_particles])
 
-    ax1 = plt.axes(frameon=False)
-    
-    plt.axis('off')
 
-    plt.axis("equal")
-    plt.scatter(x,y,color='k', s=14)
+    plt.figure()
+   
+    plt.scatter(x,y,color='k', s=25)
     plt.plot(circle.x,circle.y,'k')
     plt.xlabel("a.u.",fontweight='bold',fontsize=20)
     plt.ylabel("a.u.",fontweight='bold',fontsize=20)
     plt.xlim(-1,1)
     plt.ylim(-1,1)
+    plt.axis('off')
+    plt.axis("equal")
+    
+    if name !=None :
+        plt.savefig(name,dpi=300)
+
     plt.show()
     
+def plot_energy(list_total_energy,name=None):
+    
+
+    plt.figure()
+    ax = plt.gca()
+    #ax.set_facecolor('lightgray')
+    ax.spines["top"].set_visible(False)  
+    ax.spines["right"].set_visible(False)
+    plt.plot(list_total_energy,color='k')
+    plt.xlabel('CMTC',fontweight='bold',fontsize=12)
+    plt.ylabel('# of Steps',fontweight='bold',fontsize=12)
+    plt.xlim(0,len(list_total_energy))
+    plt.xticks(fontsize=9)
+    plt.yticks(fontsize=9)
+    
+    if name !=None :
+        plt.savefig(name,dpi=300)
 
 # =============================================================================
