@@ -31,10 +31,10 @@ def total_energy(list_particles):
         for k in range(i+1,len(list_particles)):
             
             distance= np.sqrt((list_particles[i].x - list_particles[k].x) ** 2 + \
-                           (list_particles[i].x - list_particles[k].y) ** 2)
+                           (list_particles[i].y - list_particles[k].y) ** 2)
           
            
-            total_E+=distance
+            total_E+=1/distance
             
     
     return total_E
