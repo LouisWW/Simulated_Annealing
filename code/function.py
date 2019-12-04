@@ -1,10 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt 
-import random 
+import random
+from numba import jit, void, int_, double
 
 # =============================================================================
 
 # calculate the energy level of one particle
+
 def calc_energy_1p(coordinates, particle_number, list_particles):
     E = 0
     for i in range(len(list_particles)):
@@ -16,6 +18,7 @@ def calc_energy_1p(coordinates, particle_number, list_particles):
             E += 1 / distance
 
     return E
+
 
 
 
@@ -61,7 +64,7 @@ class Particle:
         # To make sure that the points are within the circle
         self.y=random.uniform(-np.sqrt(1-self.x**2),np.sqrt(1-self.x**2))
      
-     
+
 class Circle:
     def __init__(self, r):
         self.theta=np.linspace(0,2*np.pi,100)
@@ -96,7 +99,6 @@ def plot_circle(list_particles,circle,name=None):
     plt.show()
     
 def plot_energy(list_total_energy,name=None):
-    
     plt.figure()
     ax = plt.gca()
     #ax.set_facecolor('lightgray')
@@ -111,5 +113,22 @@ def plot_energy(list_total_energy,name=None):
     
     if name !=None :
         plt.savefig(name,dpi=300)
+        
+        
+def plot_dist(list_total_E,repetition,name):
+    plt.figure()
+    ax = plt.gca()
+    ax.spines["top"].set_visible(False)  
+    ax.spines["right"].set_visible(False)
+    entries, bin_edges, patches = plt.hist(energ_dist, bins =repetition/2 , \
+                                           normed=True,color='k')
+    plt.title("The distribution of the average total energy", fontsize=12)
+    plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
+    plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
+            
+    if name !=None :
+        plt.savefig(name,dpi=300)
+    
+    
 
 # =============================================================================
