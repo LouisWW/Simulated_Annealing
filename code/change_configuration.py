@@ -11,7 +11,7 @@ def change_config(list_particles, T):
     N = len(list_particles)
 
     # av_stepsize = circle.r/100
-    av_stepsize = 0.02
+    av_stepsize = 0.2
     # r_squared = circle.r**2
     r_squared = 1 ** 2
 
@@ -45,12 +45,12 @@ def change_config(list_particles, T):
 
 # mock function to test the change config function
 def accept_config(dE, T):
-    p_boltzmann = np.exp(dE)/T
+    p_boltzmann = np.exp(-dE/T)
     print(p_boltzmann)
     if np.random.rand() > p_boltzmann:
-        return True
-    else:
         return False
+    else:
+        return True
 
 list_particles = []
 for i in range(3):
