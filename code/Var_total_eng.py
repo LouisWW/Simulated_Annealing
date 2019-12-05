@@ -18,16 +18,27 @@ repetition=1000
 energ_dist=[]
 
 for i in range(0,repetition):
+<<<<<<< HEAD
     print(i)
     length_mc = 300
     iterations = 100
     av_stepsize = 0.02
     number_of_particles = 16
     T_begin=0.1
+=======
+
+    length_mc = 10000
+    iterations = 10
+    av_stepsize = 0.02
+    number_of_particles = 4
+    T_begin= 0.1
+>>>>>>> d38304a5cc14ff0784a4d43fc1a45aeaf984b8cd
     T_end= 0.0000001
     current_T_index = 0
 
-    list_T = np.linspace(T_begin, T_end, length_mc/iterations)
+    # create list with different temp used # you can use, linear, exponential, logarithmic
+    # logarithmic is very hard coded still because I couldnt get it to fit
+    list_T = distributed_T("linear", T_begin, T_end, length_mc, iterations)
 
     # create particles
     list_particles=[Particle() for k in range(number_of_particles)]
