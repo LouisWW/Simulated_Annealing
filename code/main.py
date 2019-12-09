@@ -7,12 +7,12 @@ import time
 
 start_time = time.time()
 
-length_mc = 1000
+length_mc = 10000
 iterations = 100
 av_stepsize = 0.02
-number_of_particles = 100
-T_begin=0.1
-T_end= 0.0000001
+number_of_particles = 10
+T_begin=1
+T_end= 0.0001
 current_T_index = 0
 
 # create list with different temp used # you can use, linear, exponential, logarithmic

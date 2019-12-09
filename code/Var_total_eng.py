@@ -14,33 +14,26 @@ import time
 start_time = time.time()
 
 
-repetition=1000
+repetition=100
 energ_dist=[]
 
 for i in range(0,repetition):
-<<<<<<< HEAD
-    print(i)
-    length_mc = 300
-    iterations = 100
-    av_stepsize = 0.02
-    number_of_particles = 16
-    T_begin=0.1
-=======
 
     length_mc = 10000
-    iterations = 10
-    av_stepsize = 0.02
-    number_of_particles = 4
-    T_begin= 0.1
->>>>>>> d38304a5cc14ff0784a4d43fc1a45aeaf984b8cd
-    T_end= 0.0000001
+    iterations = 100
+    av_stepsize = 0.2
+    number_of_particles = 10
+    T_begin= 1
+
+    T_end= 0.0001
     current_T_index = 0
 
     # create list with different temp used # you can use, linear, exponential, logarithmic
     # logarithmic is very hard coded still because I couldnt get it to fit
     list_T = distributed_T("linear", T_begin, T_end, length_mc, iterations)
-
+    
     # create particles
+   
     list_particles=[Particle() for k in range(number_of_particles)]
 
     #create circle
@@ -52,14 +45,16 @@ for i in range(0,repetition):
     for j in range(0, length_mc):
         # update the temp
       
+        
         if j % iterations == 0:
             T = list_T[current_T_index]
+           
             current_T_index += 1
 
         list_particles = change_config(list_particles, T, av_stepsize)
         list_total_E.append(total_energy(list_particles))
         
-    #plot_circle(list_particles,circle)
+    plot_circle(list_particles,circle)
     #print("Total energy",total_energy(list_particles))
         
     energ_dist.append(list_total_E[-1])
@@ -73,15 +68,18 @@ print("--- %s seconds ---" % (time.time() - start_time))
 # plot figures 
 
 plot_dist(energ_dist,repetition)  
-
+plot_circle(list_particles,circle)
 # =============================================================================
-  
+
+x=plt.boxplot(energ_dist)
         
 from scipy import stats
 
 k2, p = stats.normaltest(energ_dist)
 
 print(k2,p)
-    
+
+
+
 
 
