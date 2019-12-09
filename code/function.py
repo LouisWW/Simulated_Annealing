@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt 
 import random
@@ -57,7 +59,8 @@ def accept_config(dE, T):
 
 
 # =============================================================================
-
+        
+    
 
 # Class to create the different objects
 class Particle:
@@ -76,6 +79,9 @@ class Circle:
    
 
 # =============================================================================    
+        
+        
+
 
 #  Plot the circle with the points in it 
     
@@ -122,15 +128,17 @@ def plot_dist(energy_dist,repetition,name=None):
     ax = plt.gca()
     ax.spines["top"].set_visible(False)  
     ax.spines["right"].set_visible(False)
-    entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/4) , \
+    entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/2) , \
                                            normed=True,color='k')
     plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
     plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
-    plt.show()
+
             
     if name !=None :
         plt.savefig(name,dpi=300)
+        
+    plt.show()
     
     
 def plot_whisker(energy_dist,xlabel,xunits,name=None):
