@@ -144,7 +144,7 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
                alpha=0.5)
     ax.set_axisbelow(True)
     
-    box_colors = ['darkkhaki', 'royalblue']
+    box_colors = ['gray','gray']
     num_boxes = len(energy_dist)
     medians = np.empty(num_boxes)    
     bp = ax.boxplot(energy_dist, notch=0, sym='+', vert=1, whis=1.5)
@@ -166,7 +166,7 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
             for j in range(2):
                 medianX.append(med.get_xdata()[j])
                 medianY.append(med.get_ydata()[j])
-                ax.plot(medianX, medianY, 'k')
+                ax.plot(medianX, medianY, color='k')
                 medians[i] = medianY[0]
                 
       
@@ -178,7 +178,7 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
         ax.text(pos[tick], .97, upper_labels[tick],
                  transform=ax.get_xaxis_transform(),
                  horizontalalignment='center', size=9,
-                 weight=weights[k], color=box_colors[k])
+                 color='k')
         
 
 
