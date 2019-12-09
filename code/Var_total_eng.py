@@ -14,7 +14,7 @@ import time
 start_time = time.time()
 
 
-repetition=100
+repetition=20
 energ_dist=[]
 
 for i in range(0,repetition):
@@ -54,7 +54,7 @@ for i in range(0,repetition):
         list_particles = change_config(list_particles, T, av_stepsize)
         list_total_E.append(total_energy(list_particles))
         
-    plot_circle(list_particles,circle)
+    #plot_circle(list_particles,circle)
     #print("Total energy",total_energy(list_particles))
         
     energ_dist.append(list_total_E[-1])
@@ -68,10 +68,8 @@ print("--- %s seconds ---" % (time.time() - start_time))
 # plot figures 
 
 plot_dist(energ_dist,repetition)  
-plot_circle(list_particles,circle)
+plot_whisker([energ_dist, energ_dist],"Markov Chain",["10","10"],'Test')
 # =============================================================================
-
-x=plt.boxplot(energ_dist)
         
 from scipy import stats
 
