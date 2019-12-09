@@ -14,23 +14,23 @@ import time
 start_time = time.time()
 
 
-repetition=20
+repetition=3
 energ_dist=[]
 
 for i in range(0,repetition):
 
-    length_mc = 10000
+    length_mc = 1000
     iterations = 100
     av_stepsize = 0.2
     number_of_particles = 10
     T_begin= 1
-
     T_end= 0.0001
+    T_schedule = "linear"
     current_T_index = 0
 
     # create list with different temp used # you can use, linear, exponential, logarithmic
     # logarithmic is very hard coded still because I couldnt get it to fit
-    list_T = distributed_T("linear", T_begin, T_end, length_mc, iterations)
+    list_T = distributed_T(T_schedule, T_begin, T_end, length_mc, iterations)
     
     # create particles
    
@@ -54,7 +54,7 @@ for i in range(0,repetition):
         list_particles = change_config(list_particles, T, av_stepsize)
         list_total_E.append(total_energy(list_particles))
         
-    #plot_circle(list_particles,circle)
+    plot_circle(list_particles,circle)
     #print("Total energy",total_energy(list_particles))
         
     energ_dist.append(list_total_E[-1])
@@ -63,13 +63,24 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 #%%
 
+# save file under file name with loads of parameters in the name
+filename_total_E_list = ("list_total_E_" + T_schedule + "_Trange_" + str(T_begin) +
+                            "-" + str(T_end) + "_Npar_" + str(number_of_particles)
+                            + "_lengthMC_" + str(length_mc) + "_stepsize_" + str(av_stepsize)
+                            + "_Niter_" + str(iterations))
+
+filename_total_E_list = filename_total_E_list.replace('.', '')
+np.save(filename_total_E_list, list_total_E)
+
 # =============================================================================
 
 # plot figures 
 
 plot_dist(energ_dist,repetition)  
-plot_whisker([energ_dist, energ_dist],"Markov Chain",["10","10"],'Test')
+plot_circle(list_particles,circle)
 # =============================================================================
+
+x=plt.boxplot(energ_dist)
         
 from scipy import stats
 
