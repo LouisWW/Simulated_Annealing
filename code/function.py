@@ -129,7 +129,7 @@ def plot_dist(energy_dist,repetition,name=None):
     ax.spines["top"].set_visible(False)  
     ax.spines["right"].set_visible(False)
     entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/2) , \
-                                           normed=True,color='k')
+                                           color='k')
     plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
     plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
