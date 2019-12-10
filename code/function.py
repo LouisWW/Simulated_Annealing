@@ -42,8 +42,27 @@ def total_energy(list_particles):
             
     
     return total_E
+
+
+def total_eng_theory(n_particles,on_rim=True):
+    
             
+    if on_rim==True:
+        S_n=0
+        for k in range(1,n_particles):
+            S_n+=1/(np.sin(k*np.pi/n_particles))
+        
+
+        total_energy=(n_particles/4) * S_n
+        
+    if on_rim==False:
+        S_n=0
+        for k in range(1,n_particles-1):
+            S_n+=1/(np.sin(k*np.pi/n_particles))
+        
+        total_energy=(n_particles-1)+(n_particles/4) * S_n
             
+    return total_energy
 # =============================================================================
 
 # Boltzmann equation
@@ -152,7 +171,7 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
                alpha=0.5)
     ax.set_axisbelow(True)
     
-    box_colors = ['gray','gray']
+    box_colors = ['gray','orange']
     num_boxes = len(energy_dist)
     medians = np.empty(num_boxes)    
     bp = ax.boxplot(energy_dist, notch=0, sym='+', vert=1, whis=1.5)
