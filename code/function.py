@@ -133,7 +133,7 @@ def plot_energy(list_total_energy,name=None):
     ax.spines["right"].set_visible(False)
     plt.plot(list_total_energy,color='k')
     plt.xlabel('CMTC',fontweight='bold',fontsize=12)
-    plt.ylabel('Total energy (a.u.)',fontweight='bold',fontsize=12)
+    plt.ylabel('System energy (a.u.)',fontweight='bold',fontsize=12)
     plt.xlim(0,len(list_total_energy))
     plt.xticks(fontsize=9)
     plt.yticks(fontsize=9)
@@ -151,7 +151,7 @@ def plot_dist(energy_dist,repetition,name=None):
     ax.spines["right"].set_visible(False)
     entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/2) , \
                                            color='k')
-    plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
+    plt.xlabel("System energy (a.u.)", fontsize=9, fontweight='bold')
     plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
 
             
@@ -178,8 +178,8 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
     ax.set_xticklabels(xunits)
 
     ax.set_xticklabels(xunits)
-    plt.xlabel(xlabel, fontsize=12, fontweight='bold')
-    plt.ylabel("Average total energy", fontsize=12, fontweight='bold')
+    plt.xlabel(xlabel, fontsize=9, fontweight='bold')
+    plt.ylabel("System energy (a.u.)", fontsize=9, fontweight='bold')
   
  
 
