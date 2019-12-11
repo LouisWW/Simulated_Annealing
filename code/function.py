@@ -141,6 +141,8 @@ def plot_energy(list_total_energy,name=None):
     if name !=None :
         plt.savefig(name,dpi=300)
         
+    plt.show()
+        
         
 def plot_dist(energy_dist,repetition,name=None):
     plt.figure()
@@ -176,8 +178,8 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
     ax.set_xticklabels(['1','0.02','0.005'])
 
     ax.set_xticklabels(xunits)
-    plt.xlabel(xlabel, fontsize=9, fontweight='bold')
-    plt.ylabel("Average total energy", fontsize=9, fontweight='bold')
+    plt.xlabel(xlabel, fontsize=12, fontweight='bold')
+    plt.ylabel("Average total energy", fontsize=12, fontweight='bold')
   
  
 
