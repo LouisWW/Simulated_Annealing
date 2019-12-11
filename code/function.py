@@ -133,7 +133,7 @@ def plot_energy(list_total_energy,name=None):
     ax.spines["right"].set_visible(False)
     plt.plot(list_total_energy,color='k')
     plt.xlabel('CMTC',fontweight='bold',fontsize=12)
-    plt.ylabel('# of Steps',fontweight='bold',fontsize=12)
+    plt.ylabel('Total energy (a.u.)',fontweight='bold',fontsize=12)
     plt.xlim(0,len(list_total_energy))
     plt.xticks(fontsize=9)
     plt.yticks(fontsize=9)
@@ -149,7 +149,6 @@ def plot_dist(energy_dist,repetition,name=None):
     ax.spines["right"].set_visible(False)
     entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/2) , \
                                            color='k')
-    plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel("Average total energy", fontsize=9, fontweight='bold')
     plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
 
@@ -160,58 +159,23 @@ def plot_dist(energy_dist,repetition,name=None):
     plt.show()
     
     
-def plot_whisker(energy_dist,xlabel,xunits,name=None):
+def plot_whisker(energy_dist,xlabel,xunits,name=None):                
     plt.figure()
     ax = plt.gca()
     ax.spines["top"].set_visible(False)  
     ax.spines["right"].set_visible(False)
-    # Inspired from the matplotlib example 
-    # https://matplotlib.org/3.1.1/gallery/statistics/boxplot_demo.html
     ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
                alpha=0.5)
     ax.set_axisbelow(True)
-    
-    box_colors = ['gray','orange']
-    num_boxes = len(energy_dist)
-    medians = np.empty(num_boxes)    
-    bp = ax.boxplot(energy_dist, notch=0, sym='+', vert=1, whis=1.5)
-   
-    for i in range(num_boxes):
-        box = bp['boxes'][i]
-        boxX = []
-        boxY = []
-        for j in range(5):
-            boxX.append(box.get_xdata()[j])
-            boxY.append(box.get_ydata()[j])
-            box_coords = np.column_stack([boxX, boxY])
-            # Alternate between Dark Khaki and Royal Blue
-            ax.add_patch(Polygon(box_coords, facecolor=box_colors[i % 2]))
-            # Now draw the median lines back over what we just filled in
-            med = bp['medians'][i]
-            medianX = []
-            medianY = []
-            for j in range(2):
-                medianX.append(med.get_xdata()[j])
-                medianY.append(med.get_ydata()[j])
-                ax.plot(medianX, medianY, color='k')
-                medians[i] = medianY[0]
-                
-      
-    pos = np.arange(num_boxes) + 1
-    upper_labels = [str(np.round(s, 2)) for s in medians]
-    weights = ['bold', 'semibold']
-    for tick, label in zip(range(num_boxes), ax.get_xticklabels()):
-        k = tick % 2
-        ax.text(pos[tick], .97, upper_labels[tick],
-                 transform=ax.get_xaxis_transform(),
-                 horizontalalignment='center', size=9,
-                 color='k')
-        
+    plt.boxplot(energy_dist[0])
+    print(energy_dist[0])
+    plt.boxplot([energy_dist[0],energy_dist[1]])
+    plt.boxplot([energy_dist[0],energy_dist[2]])
+    plt.boxplot([energy_dist[0],energy_dist[2],energy_dist[4]])
+    plt.boxplot([energy_dist[0],energy_dist[2],energy_dist[3]])
+    ax.set_xticklabels(['1','0.02','0.005'])
 
-
-    plt.boxplot(energy_dist)
     ax.set_xticklabels(xunits)
-    plt.title("The distribution of the average total energy", fontsize=12)
     plt.xlabel(xlabel, fontsize=9, fontweight='bold')
     plt.ylabel("Average total energy", fontsize=9, fontweight='bold')
   
