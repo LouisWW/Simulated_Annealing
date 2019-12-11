@@ -10,7 +10,7 @@ start_time = time.time()
 length_mc = 10000
 iterations = 100
 av_stepsize = 0.02
-number_of_particles = 10
+number_of_particles = 13
 T_begin=1
 T_end= 0.0001
 current_T_index = 0
@@ -45,7 +45,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 # =============================================================================
 
 # plot figures 
-
+print(total_energy(list_particles))
 plot_circle(list_particles, circle,'Final')
 plot_energy(list_total_E,'Total_energy')
 plt.show()
