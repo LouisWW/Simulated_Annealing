@@ -175,7 +175,7 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
     plt.boxplot([energy_dist[0],energy_dist[2]])
     plt.boxplot([energy_dist[0],energy_dist[2],energy_dist[4]])
     plt.boxplot([energy_dist[0],energy_dist[2],energy_dist[3]])
-    ax.set_xticklabels(['1','0.02','0.005'])
+    ax.set_xticklabels(xunits)
 
     ax.set_xticklabels(xunits)
     plt.xlabel(xlabel, fontsize=12, fontweight='bold')
