@@ -1,12 +1,21 @@
-###This file takes a list of particles representating one configuration and produces another
-###one
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+
+"""
+Created on Wed Dec  4 15:30:03 2019
+This code was implemented by Louis Weyland & Robin van den Berg'''
+
+
+This file takes a list of particles representating one configuration and 
+produces another one
+
+TO_DO in future: USE FORCE OF ALL PARTICLES TO INFLUENCE CONFIGUREATION
+"""
 import numpy as np
 from function import *
 import global_variables
 
-
-### TO_DO: USE FORCE OF ALL PARTICLES TO INFLUENCE CONFIGUREATION
 
 def change_config(list_particles, T, av_stepsize):
     N = len(list_particles)

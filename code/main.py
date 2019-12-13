@@ -1,18 +1,25 @@
-'''This code was implemented by Louis Weyland & Robin van den Berg'''
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+
+"""
+Created on Wed Dec  4 15:30:03 2019
+This code was implemented by Louis Weyland & Robin van den Berg'''
+
+"""
 from function import *
 from change_configuration import *
 import time 
 
 
-start_time = time.time()
+
 
 length_mc = 10000
 iterations = 100
 av_stepsize = 0.02
-number_of_particles = 13
-T_begin=1
-T_end= 0.0001
+number_of_particles = 12
+T_begin=0.5
+T_end= 0.0000001
 current_T_index = 0
 
 # create list with different temp used # you can use, linear, exponential, logarithmic
@@ -40,14 +47,15 @@ for i in range(0, length_mc):
     list_particles = change_config(list_particles, T, av_stepsize)
     list_total_E.append(total_energy(list_particles))
     
-print("--- %s seconds ---" % (time.time() - start_time))
-
+plot_circle(list_particles, circle)
+print(list_total_E[-1])
 # =============================================================================
-
+#%%
 # plot figures 
-print(total_energy(list_particles))
-plot_circle(list_particles, circle,'Final')
-plot_energy(list_total_E,'Total_energy')
+               
+directory=os.chdir("../Data/")  
+plot_circle(list_particles, circle,str(number_of_particles))
+#plot_energy(list_total_E,'Total_energy')
 plt.show()
 
 # =============================================================================
