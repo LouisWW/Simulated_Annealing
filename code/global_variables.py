@@ -2,7 +2,10 @@
 
 from function import *
 
-def init_global(r):
+def init_global(length_MC, n_particles):
 
-    global circle
-    circle = Circle(r)  # something like this to initialise the circle were using
+    global list_acceptance
+    list_acceptance = np.zeros(length_MC*n_particles)
+
+    global counter
+    counter = 0
