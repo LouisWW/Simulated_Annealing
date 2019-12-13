@@ -10,43 +10,41 @@ from change_configuration import *
 import time 
 import os
 
-
-
-#start_time = time.time()
-
+# Repetition represents the number of simulations so 100 
 
 repetition=100
 energ_dist=[]
 
 for i in range(0,repetition):
 
+    # Universal paramters
     length_mc = 10000
     iterations = 100
     av_stepsize = 0.02
-    number_of_particles = 12
-    T_begin= 1
-    T_end= 0.0001
+    number_of_particles = 10
+    T_begin= 0.5
+    T_end= 0.0000001
     T_schedule = "linear"
     current_T_index = 0
 
-    # create list with different temp used # you can use, linear, exponential, logarithmic
-    # logarithmic is very hard coded still because I couldnt get it to fit
+    # create list with different temp used 
+    # you can use, linear, exponential, logarithmic
     list_T = distributed_T(T_schedule, T_begin, T_end, length_mc, iterations)
     
     # create particles
-   
     list_particles=[Particle() for k in range(number_of_particles)]
 
     #create circle
     circle=Circle(r=1)
 
+    # get the total energy of the system
     total_E=total_energy(list_particles)
     list_total_E = []
-
+ 
+    # For each markov chain
     for j in range(0, length_mc):
-        # update the temp
-      
         
+        # if true --> update the temperature
         if j % iterations == 0:
             T = list_T[current_T_index]
            
@@ -60,7 +58,6 @@ for i in range(0,repetition):
         
     energ_dist.append(list_total_E[-1])
         
-#print("--- %s seconds ---" % (time.time() - start_time))
 
 
 # save file under file name with loads of parameters in the name
@@ -69,11 +66,12 @@ filename_total_E_list = ("list_total_E_" + T_schedule + "_Trange_" + str(T_begin
                             + "_lengthMC_" + str(length_mc) + "_stepsize_" + str(av_stepsize)
                             + "_Niter_" + str(iterations))
 
+
 filename_total_E_list = filename_total_E_list.replace('.', '')
 
-directory=os.chdir("../Data/")
-np.save(filename_total_E_list, energ_dist)
-plot_dist(energ_dist,repetition,filename_total_E_list)
+# to save the files uncommend the lines below
+#directory=os.chdir("../Data/")
+#np.save(filename_total_E_list, energ_dist)
+#plot_dist(energ_dist,repetition,filename_total_E_list)
 
 # =============================================================================
-#%%

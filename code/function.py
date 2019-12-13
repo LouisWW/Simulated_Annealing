@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+"""
+Created on Wed Dec  4 15:30:03 2019
+This code was implemented by Louis Weyland & Robin van den Berg'''
+
+"""
 import numpy as np
 import matplotlib.pyplot as plt 
 import random
@@ -9,7 +15,8 @@ from matplotlib.patches import Polygon
 
 # =============================================================================
 
-# calculate the energy level of one particle
+# calculate the energy level of one particle with respect to all the others 
+# using the distance as parameter
 
 def calc_energy_1p(coordinates, particle_number, list_particles):
     E = 0
@@ -25,7 +32,8 @@ def calc_energy_1p(coordinates, particle_number, list_particles):
 
 
 
-
+# calculate the total energy in  the system using the distance
+    
 def total_energy(list_particles):
     
     total_E=0
@@ -34,8 +42,8 @@ def total_energy(list_particles):
         
         for k in range(i+1,len(list_particles)):
             
-            distance= np.sqrt((list_particles[i].x - list_particles[k].x) ** 2 + \
-                           (list_particles[i].y - list_particles[k].y) ** 2)
+            distance= np.sqrt((list_particles[i].x - list_particles[k].x) ** 2\
+                        + (list_particles[i].y - list_particles[k].y) ** 2)
           
            
             total_E+=1/distance
@@ -44,6 +52,9 @@ def total_energy(list_particles):
     return total_E
 
 
+# calculate the theorectical energy for all the particles on the rim or 
+# with one particle in the centre
+    
 def total_eng_theory(n_particles,on_rim=True):
     
             
@@ -58,9 +69,9 @@ def total_eng_theory(n_particles,on_rim=True):
     if on_rim==False:
         S_n=0
         for k in range(1,n_particles-1):
-            S_n+=1/(np.sin(k*np.pi/n_particles))
+            S_n+=1/(np.sin(k*np.pi/(n_particles-1)))
         
-        total_energy=(n_particles-1)+(n_particles/4) * S_n
+        total_energy=(n_particles-1)+((n_particles-1)/4) * S_n
             
     return total_energy
 # =============================================================================
@@ -125,6 +136,8 @@ def plot_circle(list_particles,circle,name=None):
 
     plt.show()
     
+# Plot the energy after each Markov state
+    
 def plot_energy(list_total_energy,name=None):
     plt.figure()
     ax = plt.gca()
@@ -135,15 +148,17 @@ def plot_energy(list_total_energy,name=None):
     plt.xlabel('CMTC',fontweight='bold',fontsize=12)
     plt.ylabel('System energy (a.u.)',fontweight='bold',fontsize=12)
     plt.xlim(0,len(list_total_energy))
-    plt.xticks(fontsize=9)
-    plt.yticks(fontsize=9)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
     
     if name !=None :
         plt.savefig(name,dpi=300)
         
     plt.show()
         
-        
+
+#  Plot the distribution of the  minimum energy achieved after each run      
+   
 def plot_dist(energy_dist,repetition,name=None):
     plt.figure()
     ax = plt.gca()
@@ -151,8 +166,8 @@ def plot_dist(energy_dist,repetition,name=None):
     ax.spines["right"].set_visible(False)
     entries, bin_edges, patches = plt.hist(energy_dist, bins =int(repetition/2) , \
                                            color='k')
-    plt.xlabel("System energy (a.u.)", fontsize=9, fontweight='bold')
-    plt.ylabel("Occurrence (#)", fontsize=9, fontweight='bold')
+    plt.xlabel("System energy (a.u.)", fontsize=12, fontweight='bold')
+    plt.ylabel("Occurrence (#)", fontsize=12, fontweight='bold')
 
             
     if name !=None :
@@ -160,6 +175,8 @@ def plot_dist(energy_dist,repetition,name=None):
         
     plt.show()
     
+
+# Plot whisker plot (not used for the report)
     
 def plot_whisker(energy_dist,xlabel,xunits,name=None):                
     plt.figure()
@@ -195,6 +212,13 @@ def plot_whisker(energy_dist,xlabel,xunits,name=None):
     
 
 # =============================================================================
+
+# function which determines the different cooling schedules such as linear,
+# exponential or logarithmic and sigmoid. 
+# T lenght is defined by the sum of the total Markov chain
+
+
+
 def distributed_T(name_distribution, T_begin, T_end, length_mc, iterations):
 
     list_T = []
@@ -235,4 +259,19 @@ def distributed_T(name_distribution, T_begin, T_end, length_mc, iterations):
         # plt.figure()
         # plt.plot(list_T)
         # plt.show()
+        
+        
+    if name_distribution == "sigmoid":
+        
+        def func(t):
+            return 1/(1+np.e**t)
+
+        x = [0, length_mc / iterations]
+        yn = [T_begin, T_end]
+        #popt, pcov = curve_fit(func, x, yn, maxfev=10000)
+
+        for i in range(length_mc/iterations):
+            list_T.append(0.07/ np.log(i+1))
+
+        return list_T
 
