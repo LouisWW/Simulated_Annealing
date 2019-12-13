@@ -158,13 +158,21 @@ for i in par_11:
     if i <48.62:
         lower_par_11.append(i)
     else:
-        higher_par_12.appned(i)
+        higher_par_12.append(i)
 
 for i in par_11:
     if i <48.62:
         lower_par_11.append(i)
     else:
-        higher_par_12.appned(i)
+        higher_par_12.append(i)
+        
+print("Variance of higher_Markov_1000 =",np.var(higher_par_11)," | mean :",np.mean(higher_par_11))
+print("Variance of low_Markov_1000 =",np.var(lower_par_11),"  | mean :",np.mean(lower_par_11))
+
+print("Variance of higher_Markov_100000 =",np.var(higher_par_12)," | mean :",np.mean(higher_par_12))
+print("Variance of low_Markov_100000 =",np.var(lower_par_12),"  | mean :",np.mean(lower_par_12))
+
+     
 
 ###############################################################################
 
