@@ -235,7 +235,7 @@ def distributed_T(name_distribution, T_begin, T_end, length_mc, iterations):
         yn = [T_begin, T_end]
         popt, pcov = curve_fit(func, x, yn)
 
-        for i in range(length_mc/iterations):
+        for i in range(int(length_mc/iterations)):
             list_T.append(popt[0]*popt[1]**i)
 
         return list_T

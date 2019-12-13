@@ -21,10 +21,10 @@ for i in range(0,repetition):
     length_mc = 10000
     iterations = 100
     av_stepsize = 0.02
-    number_of_particles = 10
+    number_of_particles = 11
     T_begin= 0.5
     T_end= 0.0000001
-    T_schedule = "linear"
+    T_schedule = "exponential"
     current_T_index = 0
 
     # create list with different temp used 
@@ -69,9 +69,11 @@ filename_total_E_list = ("list_total_E_" + T_schedule + "_Trange_" + str(T_begin
 
 filename_total_E_list = filename_total_E_list.replace('.', '')
 
+#%%
+
 # to save the files uncommend the lines below
-#directory=os.chdir("../Data/")
-#np.save(filename_total_E_list, energ_dist)
-#plot_dist(energ_dist,repetition,filename_total_E_list)
+directory=os.chdir("../Data/")
+np.save(filename_total_E_list, energ_dist)
+plot_dist(energ_dist,repetition,filename_total_E_list)
 
 # =============================================================================

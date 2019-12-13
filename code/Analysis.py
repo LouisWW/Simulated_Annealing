@@ -142,11 +142,11 @@ plt.legend(["one in middle", "all on the rim"])
 
 print("11 and 12 particle ")
 
-par_11=np.load("list_total_E_linear_Trange_05-1e-07_Npar_11_lengthMC_10000_stepsize_002_Niter_100.npy")
-par_12=np.load("list_total_E_linear_Trange_05-1e-07_Npar_12_lengthMC_10000_stepsize_002_Niter_100.npy")
+par_11=np.load("list_total_E_exponential_Trange_05-1e-07_Npar_11_lengthMC_10000_stepsize_002_Niter_100.npy")
+par_12=np.load("list_total_E_exponential_Trange_05-1e-07_Npar_12_lengthMC_10000_stepsize_002_Niter_100.npy")
 
-plot_dist(par_11,100)
-plot_dist(par_12,100)
+plot_dist(par_11,500)
+plot_dist(par_12,500,"list_total_E_exponential_Trange_05-1e-07_Npar_12_lengthMC_10000_stepsize_002_Niter_100")
 
 lower_par_11=[]
 higher_par_11=[]
@@ -156,23 +156,22 @@ higher_par_12=[]
 
 for i in par_11:
     if i <48.62:
-        lower_par_11.append(i)
-    else:
-        higher_par_12.append(i)
+       lower_par_11.append(i)
+    elif i <49.8:
+        higher_par_11.append(i)
 
-for i in par_11:
-    if i <48.62:
-        lower_par_11.append(i)
+for i in par_12:
+    if i <59.8:
+        lower_par_12.append(i)
     else:
         higher_par_12.append(i)
         
-print("Variance of higher_Markov_1000 =",np.var(higher_par_11)," | mean :",np.mean(higher_par_11))
-print("Variance of low_Markov_1000 =",np.var(lower_par_11),"  | mean :",np.mean(lower_par_11))
+print("Variance of higher_par_11 =",np.var(higher_par_11)," | mean :",np.mean(higher_par_11))
+print("Variance of low_par_11 =",np.var(lower_par_11),"  | mean :",np.mean(lower_par_11))
 
-print("Variance of higher_Markov_100000 =",np.var(higher_par_12)," | mean :",np.mean(higher_par_12))
-print("Variance of low_Markov_100000 =",np.var(lower_par_12),"  | mean :",np.mean(lower_par_12))
+print("Variance of higher_parr_12 =",np.var(higher_par_12)," | mean :",np.mean(higher_par_12))
+print("Variance of low_parr_12 =",np.var(lower_par_12),"  | mean :",np.mean(lower_par_12))
 
-     
 
 ###############################################################################
 
