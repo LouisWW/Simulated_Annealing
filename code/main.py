@@ -9,7 +9,7 @@ This code was implemented by Louis Weyland & Robin van den Berg'''
 """
 from function import *
 from change_configuration import *
-import time 
+import os
 
 
 
@@ -32,7 +32,7 @@ list_particles=[Particle() for i in range(number_of_particles)]
 
 #create circle
 circle=Circle(r=1)
-plot_circle(list_particles,circle,'Init')
+plot_circle(list_particles,circle)
 
 
 total_E=total_energy(list_particles)
@@ -48,15 +48,19 @@ for i in range(0, length_mc):
     list_total_E.append(total_energy(list_particles))
     
 plot_circle(list_particles, circle)
-print(list_total_E[-1])
+print('This is the found minimum energy configuration :',list_total_E[-1])
 # =============================================================================
 #%%
-# plot figures 
-               
-directory=os.chdir("../Data/")  
-plot_circle(list_particles, circle,str(number_of_particles))
-#plot_energy(list_total_E,'Total_energy')
-plt.show()
+# plot figures
+
+if not os.path.exists('../Data'):
+    mkdir=input("Do you want to create a folder to save the files ? y/n ?")
+    if mkdir=='y' or mkdir=='yes':
+        os.mkdir('../Data')
+        directory=os.chdir("../Data/")
+        plot_circle(list_particles, circle, str(number_of_particles))
+        # plot_energy(list_total_E,'Total_energy')
+        plt.show()
 
 # =============================================================================
 

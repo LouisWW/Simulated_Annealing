@@ -72,8 +72,13 @@ filename_total_E_list = filename_total_E_list.replace('.', '')
 #%%
 
 # to save the files uncommend the lines below
-directory=os.chdir("../Data/")
-np.save(filename_total_E_list, energ_dist)
-plot_dist(energ_dist,repetition,filename_total_E_list)
+
+if not os.path.exists('../Data'):
+    mkdir=input("Do you want to create a folder to save the files ? y/n ?")
+    if mkdir=='y' or mkdir=='yes':
+        os.mkdir('../Data')
+        directory=os.chdir("../Data/")
+        np.save(filename_total_E_list, energ_dist)
+        plot_dist(energ_dist,repetition,filename_total_E_list)
 
 # =============================================================================
